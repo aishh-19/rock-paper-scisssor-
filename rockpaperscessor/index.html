@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet"> </head>
+<style>
+* {
+  margin: 0%;
+  padding: 0%;
+}
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.header {
+  background-color: rgb(17, 18, 29);
+  color: white;
+  height: 100px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+
+}
+.choices{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+.imges {
+    height: 150px;
+    width: 182px;
+    border-radius: 50%;
+
+}
+.btn{
+    height: 150px;
+    width: 182px;
+    border-radius: 50%;
+    border: none;
+    background-color: none;
+}
+.imges:hover{
+    border: 6px solid black;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.result{
+    margin-top: 90px;
+    background-color: rgb(17, 18, 29) ;
+    color: azure;
+    font-size: 40px;
+    height: 50px;
+    border-radius: 5px;
+
+padding: 10px;
+}
+.shows{
+    margin-top: 50px;
+    height: 70px;
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    font-size: 30px;
+}
+@media only screen and (max-width : 667px) {
+    .choices{
+        gap: 25px;
+    }
+    .imges{
+        height: 120px;
+        width: 130px;
+    
+    
+    }
+    .imges:hover{
+        border: 3px solid black;
+    }
+    .btn{
+        height: 110px;
+        width: 120px;
+        margin-top: 39px;
+    }
+    .result{
+        height: 50px;
+        margin-top: 50px;
+        font-size: 36px;
+    }
+    .shows{
+        margin-top: 58px;
+        font-size: 27px;
+        gap: 20px;
+    }
+    
+
+    
+}
+</style>
+    <title>rock paper scissor</title>
+  
+<body>
+    <div class="header">
+ 
+ <h1>       Rock paper scissor</h1>
+    </div>
+    <div class="main">
+        <div class="choices">
+        
+      <button class="btn" id="rock"> <img src="/rock.png" alt="rock" class="imges"></button><button class="btn" id="scissor">  <img src="/scissors.png" alt="scissor" class="imges"></button><button class="btn" id="paper"> <img src="/paper.png" alt="paper" class="imges"></button>
+        </div>
+        <div class="shows">
+          
+            <p>you:</p>
+            <p id="user">0</p>
+
+            <p>comp:</p>
+            <p id="comp"> 0</p>
+        </div>
+        <div class="result">
+   <p id="msg">you will win??</p>
+        </div>
+    </div>
+
+   <script>
+    let user = 0;
+    let user2 = 0;
+    let buttons = document.querySelectorAll(".btn");
+    let changePara = document.querySelector("#msg");
+    let userP = document.querySelector("#user")
+    let compP = document.querySelector("#comp")
+    userP.innerText = 0 ;
+    compP.innerText = 0 ;
+    let boxcolor = document.querySelector(".result");
+    
+    const randomno = () => {
+        const arr = ["rock", "paper", "scissor"];
+        const random = Math.floor(Math.random() * 3);
+        return arr[random];
+    }
+    
+    const draw = () => {
+        console.log("Match is a draw");
+        changePara.innerText = "it's a draw :)"
+        boxcolor.style.background = "yellow";
+        boxcolor.style.color = "black";
+    }
+    
+    const playgame = (userchoice, compchoice) => {
+        console.log("User chose =", userchoice);
+        console.log("Computer chose =", compchoice);
+    
+        if (userchoice === compchoice) {
+            draw();
+        } else {
+            let win = true;
+            if (userchoice === "paper") {
+                if (compchoice === "scissor") {
+                    console.log("You lose");
+                    changePara.innerText = "you lose"
+                    compP.innerText = parseInt(compP.innerText) + 1 ;
+                    win = false;
+                    boxcolor.style.background = "red";
+                    boxcolor.style.color = "black";
+                } else {
+                    userP.innerText = parseInt(userP.innerText) + 1 ;
+                    console.log("You won");
+                    changePara.innerText = "you won"
+                    win = true;
+                    boxcolor.style.background = "green";
+                    boxcolor.style.color = "black";
+                }
+            } else if (userchoice === "rock") {
+                if (compchoice === "paper") {
+                    console.log("You lose");
+                    changePara.innerText = "you lose"
+                    compP.innerText = parseInt(compP.innerText) + 1 ;
+                    
+                    boxcolor.style.background = "red";
+                    boxcolor.style.color = "black";
+                    win = false;
+                } else {
+                    userP.innerText = parseInt(userP.innerText) + 1 ;
+                    console.log("You won");
+                    changePara.innerText = "you won"
+                    boxcolor.style.background = "green";
+                    boxcolor.style.color = "black";
+                    win = true;
+                }
+            } else if (userchoice === "scissor") {
+                if (compchoice === "rock") {
+                    compP.innerText = parseInt(compP.innerText) + 1 ;
+                    console.log("You lose");
+                    changePara.innerText = "you lose"
+                    
+                    boxcolor.style.background = "red";
+                    boxcolor.style.color = "black";
+                    win = false;
+                } else {
+                    userP.innerText = parseInt(userP.innerText) + 1 ;
+                
+                    console.log("You won");
+                    win = true;
+                    changePara.innerText = "you won"
+                    boxcolor.style.background = "green";
+                    boxcolor.style.color = "black";
+                }
+            }
+        }
+    }
+    
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const userchoice = btn.getAttribute("id");
+            const compchoice = randomno();
+            playgame(userchoice, compchoice);
+        });
+    });
+    </script> 
+</body>
+</html>
